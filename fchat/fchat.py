@@ -28,16 +28,23 @@ class account:
     def __init__(self, username, userpass):
         self.username = username
         self.userpass = userpass
-        self.acctdata = self.flist_auth(self.username, self.userpass)
+        self.acctdata = self.init_auth(self.username, self.userpass)
         self.ticket = self.acctdata['ticket']
         self.defaultcharacter = self.acctdata['default_character']
         self.characters = self.acctdata['characters']
         self.friends = self.acctdata['friends']
         self.bookmarks = self.acctdata['bookmarks']
 
-    def flist_auth(self, username, password):
-        """Authenticates with f-list server to get API ticket"""
+    def init_auth(self, username, password):
+        """Authenticates with f-list web api to get full acount info"""
         payload = {'account': username, 'password': password}
         response = requests.post(domain + getApiTicket, params=payload)
         response_dict = json.loads(response.text)
         return response_dict
+
+    def get_ticket(self):
+        """Authenticates with f-list web api and requests minimal info"""
+        payload = {'account': self.username, 'password': self.userpass, 'no_characters': 'true', 'no_friends': 'true', 'no_bookmarks': 'true'}
+        response = requests.post(domain + getApiTicket, params=payload)
+        response_dict = json.loads(response.text)
+        self.ticket = response_dict['ticket']
