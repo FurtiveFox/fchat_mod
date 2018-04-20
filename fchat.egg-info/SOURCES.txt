@@ -1,0 +1,12 @@
+README.txt
+fchat/__init__.py
+fchat/fchat.py
+fchat/flist_mod.py
+fchat/flist_sqlite.py
+fchat/flist_websocket.py
+fchat.egg-info/PKG-INFO
+fchat.egg-info/SOURCES.txt
+fchat.egg-info/dependency_links.txt
+fchat.egg-info/requires.txt
+fchat.egg-info/top_level.txt
+test/testclient.py
