@@ -38,9 +38,16 @@ class account:
     def init_auth(self, username, password):
         """Authenticates with f-list web api to get full acount info"""
         payload = {'account': username, 'password': password}
-        response = requests.post(domain + getApiTicket, params=payload)
-        response_dict = json.loads(response.text)
-        return response_dict
+        try:
+            response = requests.post(domain + getApiTicket, params=payload)
+            response_dict = json.loads(response.text)
+            if response_dict['error'] is None:
+                return response_dict
+            else:
+                print(response_dict['error'])
+                return response_dict
+        except requests.exceptions.RequestException as e:
+            print(e)
 
     def get_ticket(self):
         """Authenticates with f-list web api and requests minimal info"""
