@@ -28,6 +28,8 @@ class account:
     def __init__(self, username, userpass):
         self.username = username
         self.userpass = userpass
+        self.s = requests.Session()
+        self.s.headers.update({'User-Agent': 'python-flist-client/0.01'})
         self.acctdata = self.init_auth(self.username, self.userpass)
         self.ticket = self.acctdata['ticket']
         self.defaultcharacter = self.acctdata['default_character']
@@ -39,10 +41,13 @@ class account:
         """Authenticates with f-list web api to get full acount info"""
         payload = {'account': username, 'password': password}
         try:
-            response = requests.post(domain + getApiTicket, params=payload)
+
+            response = self.s.post(domain + getApiTicket, params=payload)
             response_dict = json.loads(response.text)
             if response_dict['error'] is None:
+
                 return response_dict
+
             else:
                 print(response_dict['error'])
                 return response_dict
@@ -52,6 +57,6 @@ class account:
     def get_ticket(self):
         """Authenticates with f-list web api and requests minimal info"""
         payload = {'account': self.username, 'password': self.userpass, 'no_characters': 'true', 'no_friends': 'true', 'no_bookmarks': 'true'}
-        response = requests.post(domain + getApiTicket, params=payload)
+        response = self.s.post(domain + getApiTicket, params=payload)
         response_dict = json.loads(response.text)
         self.ticket = response_dict['ticket']
