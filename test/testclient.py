@@ -2,7 +2,14 @@ import os
 import fchat
 
 acct_1 = fchat.account(os.environ['FLIST_USER'], os.environ['FLIST_PASS'])
-print(acct_1.ticket)
+acct_1.init_auth()
 
-acct_1.get_ticket()
-print(acct_1.ticket)
+if acct_1.acct_dict['error']:
+    print(acct_1.acct_dict['error'])
+
+else:
+    print(acct_1.acct_dict.keys())
+    print(acct_1.acct_dict['default_character'])
+    print(acct_1.acct_dict['characters'])
+
+
