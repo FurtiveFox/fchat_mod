@@ -11,5 +11,3 @@ else:
     print(acct_1.acct_dict.keys())
     print(acct_1.acct_dict['default_character'])
     print(acct_1.acct_dict['characters'])
-
-
