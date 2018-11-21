@@ -1,3 +1,5 @@
 fchat/__pycache__/
 fchat/fchat.egg-info/
 *.pyc
+*.sublime-project
+*.sublime-workspace
