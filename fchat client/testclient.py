@@ -1,6 +1,11 @@
 import os
 import fchat
 
+import testgui as g
+
+loginwindow = g.loginwindow()
+loginwindow.mainloop()
+
 acct_1 = fchat.account(os.environ['FLIST_USER'], os.environ['FLIST_PASS'])
 acct_1.init_auth()
 
